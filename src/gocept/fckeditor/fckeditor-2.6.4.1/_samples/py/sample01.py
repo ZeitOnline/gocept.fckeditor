@@ -23,6 +23,7 @@ choice:
 Sample page.
 """
 
+from __future__ import print_function
 import cgi
 import os
 
@@ -30,11 +31,11 @@ import os
 import fckeditor
 
 # Tell the browser to render html
-print "Content-Type: text/html"
-print ""
+print("Content-Type: text/html")
+print("")
 
 # Document header
-print """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+print("""<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 	<head>
 		<title>FCKeditor - Sample</title>
@@ -48,7 +49,7 @@ print """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 		enabled.
 		<hr>
 		<form action="sampleposteddata.py" method="post" target="_blank">
-"""
+""")
 
 # This is the real work
 try:
@@ -58,14 +59,14 @@ try:
 	oFCKeditor = fckeditor.FCKeditor('FCKeditor1')
 	oFCKeditor.BasePath = sBasePath
 	oFCKeditor.Value = """<p>This is some <strong>sample text</strong>. You are using <a href="http://www.fckeditor.net/">FCKeditor</a>.</p>"""
-	print oFCKeditor.Create()
-except Exception, e:
-	print e
-print """
+	print(oFCKeditor.Create())
+except Exception as e:
+	print(e)
+print("""
 			<br>
 			<input type="submit" value="Submit">
 		</form>
-"""
+""")
 
 # For testing your environments
 #print "<hr>"
@@ -74,7 +75,7 @@ print """
 #print "<hr>"
 
 # Document footer
-print """
+print("""
 	</body>
 </html>
-"""
+""")

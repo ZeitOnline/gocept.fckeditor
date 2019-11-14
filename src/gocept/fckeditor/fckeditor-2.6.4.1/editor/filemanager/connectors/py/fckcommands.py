@@ -90,13 +90,13 @@ class CreateFolderCommandMixin (object):
 		Purpose: command to create a new folder
 		"""
 		errorNo = 0; errorMsg ='';
-		if self.request.has_key("NewFolderName"):
+		if "NewFolderName" in self.request:
 			newFolder = self.request.get("NewFolderName", None)
 			newFolder = sanitizeFolderName (newFolder)
 			try:
 				newFolderPath = mapServerFolder(self.userFilesFolder, combinePaths(currentFolder, newFolder))
 				self.createServerFolder(newFolderPath)
-			except Exception, e:
+			except Exception as e:
 				errorMsg = str(e).decode('iso-8859-1').encode('utf-8') # warning with encodigns!!!
 				if hasattr(e,'errno'):
 					if e.errno==17: #file already exists
@@ -120,11 +120,11 @@ class CreateFolderCommandMixin (object):
 			if not permissions:
 				os.makedirs(folderPath)
 		except AttributeError: #ChmodOnFolderCreate undefined
-			permissions = 0755
+			permissions = 0o755
 
 		if permissions:
 			oldumask = os.umask(0)
-			os.makedirs(folderPath,mode=0755)
+			os.makedirs(folderPath,mode=0o755)
 			os.umask( oldumask )
 
 class UploadFileCommandMixin (object):
@@ -133,7 +133,7 @@ class UploadFileCommandMixin (object):
 		Purpose: command to upload files to server (same as FileUpload)
 		"""
 		errorNo = 0
-		if self.request.has_key("NewFile"):
+		if "NewFile" in self.request:
 			# newFile has all the contents we need
 			newFile = self.request.get("NewFile", "")
 			# Get the file name
@@ -173,7 +173,7 @@ class UploadFileCommandMixin (object):
 						errorNo= 201 # file renamed
 					else:
 						# Read file contents and write to the desired path (similar to php's move_uploaded_file)
-						fout = file(newFilePath, 'wb')
+						fout = open(newFilePath, 'wb')
 						while (True):
 							chunk = newFile.file.read(100000)
 							if not chunk: break
@@ -187,7 +187,7 @@ class UploadFileCommandMixin (object):
 								permissions = Config.ChmodOnUpload
 							except AttributeError: #ChmodOnUpload undefined
 								doChmod = True
-								permissions = 0755
+								permissions = 0o755
 							if ( doChmod ):
 								oldumask = os.umask(0)
 								os.chmod( newFilePath, permissions )

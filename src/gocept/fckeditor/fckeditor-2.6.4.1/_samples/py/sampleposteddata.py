@@ -23,21 +23,22 @@ choice:
 This page lists the data posted by a form.
 """
 
+from __future__ import print_function
 import cgi
 import os
 
 # Tell the browser to render html
-print "Content-Type: text/html"
-print ""
+print("Content-Type: text/html")
+print("")
 
 try:
 	# Create a cgi object
 	form = cgi.FieldStorage()
-except Exception, e:
-	print e
+except Exception as e:
+	print(e)
 
 # Document header
-print """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+print("""<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 	<head>
 		<title>FCKeditor - Samples - Posted Data</title>
@@ -46,10 +47,10 @@ print """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 		<link href="../sample.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
-"""
+""")
 
 # This is the real work
-print """
+print("""
 		<h1>FCKeditor - Samples - Posted Data</h1>
 		This page lists all data posted by the form.
 		<hr>
@@ -61,19 +62,19 @@ print """
 					<th>Value</th>
 				</tr>
 			</thead>
-"""
+""")
 for key in form.keys():
 	try:
 		value = form[key].value
-		print """
+		print("""
 				<tr>
 					<th>%s</th>
 					<td><pre>%s</pre></td>
 				</tr>
-			""" % (cgi.escape(key), cgi.escape(value))
-	except Exception, e:
-		print e
-print "</table>"
+			""" % (cgi.escape(key), cgi.escape(value)))
+	except Exception as e:
+		print(e)
+print("</table>")
 
 # For testing your environments
 #print "<hr>"
@@ -82,7 +83,7 @@ print "</table>"
 #print "<hr>"
 
 # Document footer
-print """
+print("""
 	</body>
 </html>
-"""
+""")
