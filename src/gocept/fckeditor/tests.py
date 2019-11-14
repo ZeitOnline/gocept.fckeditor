@@ -1,26 +1,24 @@
 # Copyright (c) 2007-2009 gocept gmbh & co. kg
 # See also LICENSE.txt
 
-import os
 import unittest
+import gocept.fckeditor
+import doctest
 
-from zope.testing import doctest
-
-import zope.app.testing.functional
+import zope.app.wsgi.testlayer
 
 
-FCKEditorLayer = zope.app.testing.functional.ZCMLLayer(
-    os.path.join(os.path.dirname(__file__), 'ftesting.zcml'),
-    __name__, 'FCKEditorLayer', allow_teardown=True)
+FCKEditorLayer = zope.app.wsgi.testlayer.BrowserLayer(
+        gocept.fckeditor, name='FCKEditorLayer', allowTearDown=True)
 
 
 def test_suite():
     suite = unittest.TestSuite()
-    ftest = zope.app.testing.functional.FunctionalDocFileSuite(
+    ftest = doctest.DocFileSuite(
         'README.txt',
         optionflags=(doctest.REPORT_NDIFF + doctest.NORMALIZE_WHITESPACE +
-                     doctest.ELLIPSIS))
+                     doctest.ELLIPSIS),
+        globs={'layer': FCKEditorLayer})
     ftest.layer = FCKEditorLayer
     suite.addTest(ftest)
     return suite
-

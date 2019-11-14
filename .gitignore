@@ -1,0 +1,11 @@
+syntax: glob
+.installed.cfg
+bin
+develop-eggs
+dist
+eggs
+parts
+.tox
+__pycache__
+gocept.fckeditor.egg-info
+*.pyc

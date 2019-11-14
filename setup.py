@@ -23,9 +23,8 @@ setup(
     ],
     extras_require={
         'test': [
-            'zope.testing',
             'zope.testbrowser',
-            'zope.app.testing',
+            'zope.app.wsgi',
             'zope.app.zcmlfiles',
         ],
         'fanstatic': ['fanstatic'],
