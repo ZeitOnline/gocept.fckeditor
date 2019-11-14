@@ -2,3 +2,4 @@ recursive-include src *.txt
 recursive-include src *.zcml
 recursive-include src *.patch
 recursive-include src *.pt
+recursive-include src/gocept/fckeditor/fckeditor-2.6.4.1/ *
