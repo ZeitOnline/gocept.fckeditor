@@ -13,5 +13,14 @@
 
   <include package="gocept.fckeditor" />
 
+  <resourceLibrary name="gocept.fckeditor">
+    <directory source="fckeditor-2.6.4.1" />
+  </resourceLibrary>
+
+  <resourceLibrary name="gocept.fckeditor.editor" require="gocept.fckeditor">
+    <directory source="fckeditor-2.6.4.1"
+      include="fckeditor.js"/>
+  </resourceLibrary>
+
 </configure>
 

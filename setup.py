@@ -14,10 +14,10 @@ setup(
     zip_safe=False,
 
     install_requires=[
-        'zc.resourcelibrary',
     ],
     extras_require={
         'test': [
+            'zc.resourcelibrary',
             'zope.testbrowser',
             'zope.app.wsgi',
             'zope.app.zcmlfiles',
